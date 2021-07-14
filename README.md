@@ -31,7 +31,7 @@ This line reads the file (which has to be in the same directory as the .py file)
 
 `while cv2.imshow("Life in 6 lines", img*255) == None and cv2.waitKey(1) != 27 and cv2.getWindowProperty("Life in 6 lines", cv2.WND_PROP_VISIBLE) > 0:`
 
-This is the main loop which just repeats and executes one iteration of life. `cv2.imshow()` shows the img and is called inside this condition, so that the third condition can run properly, it returns nothing. The `cv2.waitKey(n)` function waits for n milliseconds for an ASCII input, where 27 is encoded to be the escape key. Without this command to wait for atleast 1 millisecond (like it is here) cv2 wouldn't display anything. Also this command allows the user to end the sim by pressing esc. The last bool if false, when the window was closed by the "X" button on the window and this ends the sim as well. Otherwise the window would just reopen.
+This is the main loop which just repeats and executes one iteration of life. `cv2.imshow()` shows the img and is called inside this condition, so that the third condition can run properly, it returns nothing. The `cv2.waitKey(n)` function waits for n milliseconds for an ASCII input, where 27 is encoded to be the escape key. Without this command to wait for atleast 1 millisecond (like it is here) cv2 wouldn't display anything. Also this command allows the user to end the sim by pressing esc. The last bool is false, when the window was closed by the "X" button on the window and this ends the sim as well. Otherwise the window would just reopen.
 
 ### Fourth Line: Neighbor Counting
 
