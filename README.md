@@ -48,6 +48,6 @@ Because we want the values of our neighboring cells to be added together but not
 
 `img = (np.logical_and((summed == 2) + (summed == 3), img) + np.logical_and(summed == 3, 1-img)).astype("uint8")`
 
-Here I implement all the four rules in one line. From the beginning all cells are considered dead. Then the cells which have two or three neighbors (`(summed == 2) + (summed == 3)`) **and** (`np.logical_and()`) were already alive (`img`; ones are alive cells -> converted to true) are updated to living status. Finally the cells which have exactly three neighbors (`summed == 3`) **and** were dead (`1-img`; all dead cells become ones -> converted to true) also become living. These are then combined together and converted to an integer array for the new image of cells. One iteration done.
+Here I implemented all the four rules in one line. From the beginning all cells are considered dead. Then the cells which have two or three neighbors (`(summed == 2) + (summed == 3)`) **and** (`np.logical_and()`) were already alive (`img`; ones are alive cells -> converted to true) are updated to living status. Finally the cells which have exactly three neighbors (`summed == 3`) **and** were dead (`1-img`; all dead cells become ones -> converted to true) also become living. These are then combined together and converted to an integer array for the new image of cells. One iteration done.
 
 Done! That's all there is to it.
