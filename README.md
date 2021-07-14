@@ -29,9 +29,9 @@ This line reads the file (which has to be in the same directory as the .py file)
 
 ### Third Line: While Loop
 
-`while cv2.waitKey(1) != 27:`
+`while cv2.imshow("Life in 6 lines", img*255) == None and cv2.waitKey(1) != 27 and cv2.getWindowProperty("Life in 6 lines", cv2.WND_PROP_VISIBLE) > 0:`
 
-This is the main loop which just repeats and executes one iteration of life. The `cv2.waitKey(n)` function waits for n milliseconds for an ASCII input, where 27 is encoded to be the escape key. Without this command to wait for atleast 1 millisecond (like it is here) cv2 wouldn't display anything. Also this command allows the user to end the sim by pressing esc.
+This is the main loop which just repeats and executes one iteration of life. `cv2.imshow()` shows the img and is called inside this condition, so that the third condition can run properly, it returns nothing. The `cv2.waitKey(n)` function waits for n milliseconds for an ASCII input, where 27 is encoded to be the escape key. Without this command to wait for atleast 1 millisecond (like it is here) cv2 wouldn't display anything. Also this command allows the user to end the sim by pressing esc. The last bool if false, when the window was closed by the "X" button on the window and this ends the sim as well. Otherwise the window would just reopen.
 
 ### Fourth Line: Neighbor Counting
 
@@ -49,11 +49,5 @@ Because we want the values of our neighboring cells to be added together but not
 `img = (np.logical_and((summed == 2) + (summed == 3), img) + np.logical_and(summed == 3, 1-img)).astype("uint8")`
 
 Here I implement all the four rules in one line. From the beginning all cells are considered dead. Then the cells which have two or three neighbors (`(summed == 2) + (summed == 3)`) **and** (`np.logical_and()`) were already alive (`img`; ones are alive cells -> converted to true) are updated to living status. Finally the cells which have exactly three neighbors (`summed == 3`) **and** were dead (`1-img`; all dead cells become ones -> converted to true) also become living. These are then combined together and converted to an integer array for the new image of cells. One iteration done.
-
-### Sixth Line: Update Image
-
-`cv2.imshow("Conway's Game of Life", img*255)`
-
-At the end the image has to be convert from 0's and 1's to a range up to 255, so the image is multiplied by 255. This the input to the `cv2.imshow()` function together with the name of the window to display each iteration.
 
 Done! That's all there is to it.
