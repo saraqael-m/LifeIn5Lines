@@ -7,7 +7,7 @@ Tested with [**Python 3.7.9**](https://www.python.org/downloads/release/python-3
 
 * [cv2](https://pypi.org/project/opencv-python/) (`pip install opencv-python`)
 * [numpy](https://numpy.org/install/) (`pip install numpy`)
-* [scipy](https://www.scipy.org/install.html) (`pip install scimpy`)
+* [scipy](https://www.scipy.org/install.html) (`pip install scipy`)
 
 When you run the script either by cmd or via IDE you need to have the start image (black and white image to show which cells should live in first iteration) in the same folder as the .py file. It should be named "start.png" (unless you specified otherwise in the code) and shouldn't have a bigger resolution than your screen, so that you can see everything and it doesn't lag.
 
