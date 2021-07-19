@@ -35,19 +35,19 @@ This is the main loop which just repeats and executes one iteration of life. `cv
 
 ### Fourth Line: Neighbor Counting
 
-`summed = scipy.ndimage.correlate(img,np.array([[1,1,1],[1,0,1],[1,1,1]]),mode="constant")`
+`neighbor_count = scipy.ndimage.correlate(img,np.array([[1,1,1],[1,0,1],[1,1,1]]),mode="constant")`
 
 The [correlate function](https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.correlate.html) does the following:
 
 > Correlation is the process of moving a filter mask often referred to as kernel over the image and computing the sum of products at each location.
 
-Because we want the values of our neighboring cells to be added together but not the own of the central cell, we need this mask/kernel: 
+Because we want the values of our neighboring cells to be added together but not the value of the central cell itself, we need this mask/kernel: 
 `[[1,1,1],[1,0,1],[1,1,1]]`. With this the central cell is multiplied by zero and is thus never counted. We also pass in our image to this function and another parameter, called "mode", which just defines what should happen with cells at the edge of the image. "constant" means there are constant zero's around the edge of the image so that cells at the edge just come to a stop. You could also use "wrap" to make them appear on the other side of the image.
 
 ### Fifth Line: Logic of Life
 
-`img = (np.logical_and((summed == 2) + (summed == 3), img) + np.logical_and(summed == 3, 1-img)).astype("uint8")`
+`img = (np.logical_and((neighbor_count == 2) + (neighbor_count == 3), img) + np.logical_and(neighbor_count == 3, 1-img)).astype("uint8")`
 
-Here I implemented all the four rules in one line. From the beginning all cells are considered dead. Then the cells which have two or three neighbors (`(summed == 2) + (summed == 3)`) **and** (`np.logical_and()`) were already alive (`img`; ones are alive cells -> converted to true) are updated to living status. Finally the cells which have exactly three neighbors (`summed == 3`) **and** were dead (`1-img`; all dead cells become ones -> converted to true) also become living. These are then combined together and converted to an integer array for the new image of cells. One iteration done.
+Here I implemented all the four rules in one line. From the beginning all cells are considered dead. Then the cells which have two or three neighbors (`(neighbor_count == 2) + (neighbor_count == 3)`) **and** (`np.logical_and()`) were already alive (`img`; ones are alive cells -> converted to true) are updated to living status. Finally the cells which have exactly three neighbors (`neighbor_count == 3`) **and** were dead (`1-img`; all dead cells become ones -> converted to true) also become living. These are then combined together and converted to an integer array for the new image of cells. One iteration done.
 
 And that's all there is to it.
